@@ -1,44 +1,46 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  ViewStyle,
-  TextStyle,
-} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, RouteProp} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {BaseScreen} from './BaseScreen';
 
-interface AppStyle {
-  wrapper: ViewStyle;
-  title: TextStyle;
+export interface AppScreenProps {
+    text: string;
 }
 
+export type AppScreens = {
+    First: AppScreenProps,
+    Second: AppScreenProps,
+    Third: AppScreenProps,
+}
+
+export type BaseScreenRouteProp = 
+    RouteProp<AppScreens, "First"> |
+    RouteProp<AppScreens, "Second"> |
+    RouteProp<AppScreens, "Third">;
+
 const App: React.FC = (): React.ReactElement => {
-  const style: StyleSheet.NamedStyles<AppStyle> = StyleSheet.create({
-    wrapper: {
-      marginTop: 32,
-      paddingHorizontal: 24,
-    },
-    title: {
-      fontSize: 24,
-      fontWeight: '600',
-    },
-  });
+  const Tab = createBottomTabNavigator<AppScreens>();
 
   return (
     <>
       <NavigationContainer>
-      <StatusBar />
-      <SafeAreaView>
-        <ScrollView>
-          <View style={style.wrapper}>
-            <Text style={style.title}>React Native</Text>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+          <Tab.Navigator>
+              <Tab.Screen
+                  name={"First"}
+                  component={BaseScreen}
+                  initialParams={{text: "First screen"}}
+              />
+              <Tab.Screen
+                  name={"Second"}
+                  component={BaseScreen}
+                  initialParams={{text: "Second screen"}}
+              />
+              <Tab.Screen
+                  name={"Third"}
+                  component={BaseScreen}
+                  initialParams={{text: "Third screen"}}
+              />
+          </Tab.Navigator>
       </NavigationContainer>
     </>
   );
