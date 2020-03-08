@@ -9,6 +9,7 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 
 interface AppStyle {
   wrapper: ViewStyle;
@@ -29,6 +30,7 @@ const App: React.FC = (): React.ReactElement => {
 
   return (
     <>
+      <NavigationContainer>
       <StatusBar />
       <SafeAreaView>
         <ScrollView>
@@ -37,6 +39,7 @@ const App: React.FC = (): React.ReactElement => {
           </View>
         </ScrollView>
       </SafeAreaView>
+      </NavigationContainer>
     </>
   );
 };
