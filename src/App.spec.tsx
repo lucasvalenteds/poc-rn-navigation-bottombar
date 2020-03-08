@@ -1,4 +1,3 @@
-import {Text} from 'react-native';
 import React from 'react';
 import App from './App';
 
@@ -7,10 +6,28 @@ import ReactRenderer, {
   ReactTestInstance,
 } from 'react-test-renderer';
 
-test('It renders the text', () => {
-  const renderer: ReactTestRenderer = ReactRenderer.create(<App />);
+const renderer: ReactTestRenderer = ReactRenderer.create(<App />);
 
-  const node: ReactTestInstance = renderer.root.findByType(Text);
+test('First screen navigates to seconds screen', () => {
+    const first: ReactTestInstance = renderer.root.findByProps({children: "1st screen"});
 
-  expect(node.props.children).toStrictEqual('React Native');
+    ReactRenderer.act(() => first.props.onPress());
+
+    expect(() => renderer.root.findByProps({children: "2nd screen"})).not.toThrowError();
+});
+
+test('Second screen navigates to third screen', async () => {
+    const second: ReactTestInstance = renderer.root.findByProps({children: "2nd screen"});
+
+    ReactRenderer.act(() => second.props.onPress());
+
+    expect(() => renderer.root.findByProps({children: "3rd screen"})).not.toThrowError();
+});
+
+test('Third screen navigates to first screen', async () => {
+    const third: ReactTestInstance = renderer.root.findByProps({children: "3rd screen"});
+
+    ReactRenderer.act(() => third.props.onPress());
+
+    expect(() => renderer.root.findByProps({children: "1st screen"})).not.toThrowError();
 });
