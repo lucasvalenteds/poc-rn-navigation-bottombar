@@ -14,9 +14,9 @@ export enum AppScreen {
 }
 
 export type AppScreens = {
-    First: AppScreenProps,
-    Second: AppScreenProps,
-    Third: AppScreenProps,
+    First: AppScreenProps;
+    Second: AppScreenProps;
+    Third: AppScreenProps;
 }
 
 export type BaseScreenRouteProp = 

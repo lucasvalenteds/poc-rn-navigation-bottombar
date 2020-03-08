@@ -19,7 +19,7 @@ export const BaseScreen: React.FC = () => {
     const route = useRoute<BaseScreenRouteProp>();
     const navigation = useNavigation<BaseScreenNavigationProp>();
 
-    const onPress = () => {
+    const onPress = (): void => {
         switch (route.name) {
             case AppScreen.First:
                 navigation.navigate(AppScreen.Second);
