@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 import {useRoute, useNavigation} from '@react-navigation/native';
-import {BaseScreenRouteProp, BaseScreenNavigationProp} from './App';
+import {AppScreen, BaseScreenRouteProp, BaseScreenNavigationProp} from './App';
 
 const style = StyleSheet.create({
     view: {
@@ -21,14 +21,14 @@ export const BaseScreen: React.FC = () => {
 
     const onPress = () => {
         switch (route.name) {
-            case "First":
-                navigation.navigate("Second");
+            case AppScreen.First:
+                navigation.navigate(AppScreen.Second);
             break;
-            case "Second":
-                navigation.navigate("Third");
+            case AppScreen.Second:
+                navigation.navigate(AppScreen.Third);
             break;
-            case "Third":
-                navigation.navigate("First");
+            case AppScreen.Third:
+                navigation.navigate(AppScreen.First);
             break;
         }
     };
